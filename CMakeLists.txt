@@ -15,7 +15,11 @@ ENDIF(NOT WIN32)
 
 # FIXME Set to appropriate directory if having trouble to find OVRSDK, second entry is for travis
 FIND_PATH(OCULUS_SDK_DIR "LibOVR/Include/OVR.h" PATHS ${CMAKE_SOURCE_DIR}/../OculusSDK ${CMAKE_BINARY_DIR}/jherico/OculusSDK ${CMAKE_SOURCE_DIR}/../jherico/OculusSDK ${CMAKE_SOURCE_DIR}/../../jherico/OculusSDK)
-MESSAGE("Found Oculus SDK at ${OCULUS_SDK_DIR}")
+IF(NOT OCULUS_SDK_DIR)
+  MESSAGE(FATAL_ERROR "Oculus SDK include directory not found")
+ELSE()
+  MESSAGE("Found Oculus SDK at ${OCULUS_SDK_DIR}")
+ENDIF(NOT OCULUS_SDK_DIR)
 # FIXME
 
 IF(WIN32)
